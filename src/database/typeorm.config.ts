@@ -1,5 +1,3 @@
-import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
-
 import { DataSourceOptions } from 'typeorm';
 
 export function buildTypeOrmOptions(databaseUrl: string, ssl: boolean):DataSourceOptions{
@@ -9,7 +7,6 @@ export function buildTypeOrmOptions(databaseUrl: string, ssl: boolean):DataSourc
 
         synchronize: false,
         logging: false,
-        namingStrategy: new SnakeNamingStrategy(),
         ssl: ssl ? {rejectUnauthorized: false} : false,
     };
 };

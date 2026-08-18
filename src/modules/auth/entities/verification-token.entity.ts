@@ -1,28 +1,37 @@
-import { BaseEntity } from "@/common/entities/base.entity";
-import { Column, Entity, Index, JoinColumn, ManyToMany } from "typeorm";
-import { VerificationTokenType } from "../enum/verification-token-type.enum";
-import { User } from "./user.entity";
+import {
+  Entity,
+  Column,
+  ManyToOne,
+  JoinColumn,
+  Index,
+} from 'typeorm';
+import { User } from './user.entity';
+import { VerificationTokenType } from '../enum/verification-token-type.enum';
+import { BaseEntity } from '@/shared/entities/base.entity';
 
 @Entity('verification_tokens')
 export class VerificationToken extends BaseEntity{
-    @Index()
-    @Column()
-    userId!: string;
+  @Index()
+  @Column()
+  userId!: string;
 
-    @Column({select: false})
-    tokenHash!: string;
+  @Column({ select: false })
+  codeHash!: string;
 
-    @Column({type: 'varchar'})
-    type!: VerificationTokenType;
+  @Column({type: 'enum', enum: VerificationTokenType})
+  type!: VerificationTokenType;
 
-    @Index()
-    @Column({type: 'timestamp'})
-    expiresAt!: Date;
+  @Column({ default: 0 })
+  attemptsCount!: number;
 
-    @Column({type: 'timestamp', nullable: true})
-    usedAt?: Date;
+  @Index()
+  @Column({ type: 'timestamptz' })
+  expiresAt!: Date;
 
-    @ManyToMany(() => User, { onDelete: 'CASCADE'})
-    @JoinColumn({name: 'userId'})
-    user!: User;
+  @Column({ type: 'timestamptz', nullable: true })
+  usedAt?: Date;
+
+  @ManyToOne(() => User, { onDelete: 'CASCADE' })
+  @JoinColumn({ name: 'userId' })
+  user!: User;
 };

@@ -1,31 +1,29 @@
-import { BaseEntity } from "@/common/entities/base.entity";
-import { Column, Entity, Index, OneToOne } from "typeorm";
-import { UserStatus } from "../enum/user-status";
-import { UserProfile } from "@/modules/user-profile/entities/user-profile.entity";
+import { Entity, Column, Index } from "typeorm";
+import { AccountStatus } from "../enum/account-status.enum";
+import { AccountType } from "../enum/account-type.enum";
+import { BaseEntity } from "@/shared/entities/base.entity";
+
 
 @Entity('users')
-export class User extends BaseEntity {
-   @Index({unique: true})
-   @Column()
-   email!: string;
+export class User extends BaseEntity{
+  @Index({ unique: true })
+  @Column()
+  email!: string;
 
-   // @Index({unique: true})
-   // @Column()
-   // phoneNumber!: string;
+  @Column()
+  phoneNumber!: string;
 
-   @Index()
-   @Column({type: 'varchar', default: UserStatus})
-   status!: string;
+  @Column({ default: false })
+  isEmailVerified!: boolean;
 
-   @Column({default: false})
-   isEmailVerified!: string;
-   
-   // @Column({default: false})
-   // isPhoneVerified!: string;
+  @Index()
+  @Column({ type: 'varchar', default: AccountStatus.PENDING })
+  status!: AccountStatus;
 
-   @Column({ type: 'timestamp', nullable: true })
-   lastLoginAt!: Date
+  @Index()
+  @Column({ type: 'varchar', default: AccountType.REGULAR_USER })
+  accountType!: AccountStatus;
 
-   @OneToOne(()=> UserProfile, (profile) => profile.user)
-   profile!: UserProfile
+  // @OneToOne(() => UserProfile, (profile) => profile.user)
+  // profile!: UserProfile;
 };
