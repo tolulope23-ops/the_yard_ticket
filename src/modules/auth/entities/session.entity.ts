@@ -5,16 +5,17 @@ import {
   JoinColumn,
   Index,
 } from 'typeorm';
-
-import { BaseEntity } from '@/common/entities/base.entity';
-import { User } from './user.entity';
+import { UserAccount } from './user-account.entity';
+import { BaseEntity } from '@/shared/entities/base.entity';
 
 @Entity('sessions')
+@Index(['accountId', 'isRevoked'])
 export class Session extends BaseEntity{
   @Index()
   @Column()
-  userId!: string;
+  accountId!: string; 
 
+  @Index()
   @Column({ select: false })
   refreshTokenHash!: string;
 
@@ -40,7 +41,7 @@ export class Session extends BaseEntity{
   @Column({ type: 'timestamp', nullable: true })
   revokedAt?: Date | null;
 
-  @ManyToOne(() => User, { onDelete: 'CASCADE' })
-  @JoinColumn({ name: 'userId' })
-  user!: User;
+  @ManyToOne(() => UserAccount, { onDelete: 'CASCADE' })
+  @JoinColumn({ name: 'accountId' })
+  userAccount!: UserAccount;
 };
