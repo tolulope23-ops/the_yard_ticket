@@ -12,6 +12,7 @@ import { ResponseInterceptors } from './common/interceptors/response.interceptor
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { buildTypeOrmOptions } from './database/typeorm.config';
+import { AuthModule } from './modules/auth/auth.module';
 
 
 @Module({
@@ -39,7 +40,8 @@ import { buildTypeOrmOptions } from './database/typeorm.config';
         ttl: 6000,
         limit: 10,
       }
-    ])
+    ]),
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [
