@@ -1,8 +1,9 @@
-import { Column, Index, JoinColumn, ManyToOne, type Point } from "typeorm";
+import { Column, Entity, Index, JoinColumn, ManyToOne, type Point } from "typeorm";
 import { EventStatus } from "../enum/event-status.enum";
 import { UserAccount } from "@/modules/auth/entities/user-account.entity";
 import { EventCategory } from "../enum/event-category.enum";
 
+@Entity('events')
 export class Event {
     @Index()
     @Column()
