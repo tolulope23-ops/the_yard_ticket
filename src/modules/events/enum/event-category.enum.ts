@@ -1,4 +1,5 @@
 export enum EventCategory{
+    TECH = "Tech",
     CONCERT = "Concert",
     CONFERENCE = "Conference",
     Wedding = "Wedding",
