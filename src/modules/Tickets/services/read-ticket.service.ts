@@ -16,7 +16,7 @@ export class ReadTicketService {
         });
 
         if (eventTickets.length === 0) {
-            throw new NotFoundException('event tickets not available');
+            throw new NotFoundException('Tickets not available');
         };
 
         return eventTickets;
