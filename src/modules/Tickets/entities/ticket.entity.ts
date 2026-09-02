@@ -1,5 +1,4 @@
 import { Column, Entity, Index, JoinColumn, ManyToOne } from "typeorm";
-import { TicketType } from "../enum/tickets-type.enum";
 import { Event } from "@/modules/events/entities/events.entity";
 import { BaseEntity } from "@/shared/entities/base.entity";
 
@@ -10,8 +9,8 @@ export class Ticket extends BaseEntity{
     @Column()
     eventId!: string;
 
-    @Column({type: 'enum', enum: TicketType})
-    ticketType!: TicketType;
+    @Column({type: 'varchar', length: 50})
+    ticketType!: string;
 
     @Index()
     @Column({type: 'numeric', precision: 12, scale: 2})
@@ -19,9 +18,6 @@ export class Ticket extends BaseEntity{
 
     @Column({type: 'integer', default: 0})
     quantity!: number;
-
-    @Column({type: 'integer'})
-    quantityAvailable!: number;
 
     @Column({type: 'integer', default: 0})
     quantitySold!: number;
