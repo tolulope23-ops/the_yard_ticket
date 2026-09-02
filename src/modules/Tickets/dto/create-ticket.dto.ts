@@ -1,9 +1,8 @@
-import { IsEnum, IsInt, IsNotEmpty, IsNumber, IsString, MaxLength, Min } from "class-validator";
-import { TicketType } from "../enum/tickets-type.enum";
+import {IsInt, IsNotEmpty, IsNumber, IsString, MaxLength, Min } from "class-validator";
 
-export class CreateTicketDto{
-    @IsEnum(TicketType)
-    ticketType!: TicketType;
+export class CreateTicketDto {
+    @IsString()
+    ticketType!: string;
 
     @IsNumber({ maxDecimalPlaces: 2 })
     @Min(0)

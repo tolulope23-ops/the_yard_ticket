@@ -1,21 +1,26 @@
 import { IsEnum, IsInt, IsNotEmpty, IsNumber, IsOptional, IsString, IsUUID, MaxLength, Min } from "class-validator";
-import { TicketType } from "../enum/tickets-type.enum";
+import { QuantityOperation } from "../enum/quantity-operation.enum";
 
 export class UpdateTicketDto {
-    @IsOptional()
     @IsUUID()
-    id?: string;
+    ticketId!: string;
 
-    @IsEnum(TicketType)
-    ticketType!: TicketType;
+    @IsOptional()
+    @IsString()
+    ticketType?: string;
 
+    @IsOptional()
     @IsNumber({ maxDecimalPlaces: 2 })
     @Min(0)
-    unitPrice!: number;
+    unitPrice?: number;
 
+    @IsOptional()
     @IsInt()
-    @Min(1)
-    quantity!: number;
+    quantity?: number;
+
+    @IsOptional()
+    @IsEnum(QuantityOperation)
+    quantityOperation?: QuantityOperation;
 
     @IsOptional()
     @IsString()
