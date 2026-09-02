@@ -1,4 +1,4 @@
-import { Ticket } from "@/modules/Tickets/entities/ticket.entity";
+import { Ticket } from "@/modules/tickets/entities/ticket.entity";
 import { Event } from "../entities/events.entity";
 
 //Public Facing event responses
@@ -35,7 +35,6 @@ export function eventTicketResponse(ticket: Ticket) {
         ticketType: ticket.ticketType,
         unitPrice: ticket.unitPrice,
         quantity: ticket.quantity,
-        quantityAvailable: ticket.quantityAvailable,
         ticketImage: ticket.ticketImage,
     };
 };
